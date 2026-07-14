@@ -15,3 +15,4 @@ Get a 25+ LPA ML/AI job by 2028.
 - Week 1 Day 1 — Train/test split, cross validation ✅
 - Week 1 Day 2 — NumPy, confusion matrix ✅
 - Week 1 Day 3 — Titanic EDA ✅
+- Week 1 Day 4 — Linear Regression from Scratch ✅
