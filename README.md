@@ -106,9 +106,8 @@ Currently: 3rd year B.Tech CSE (AI) student at NIET, Greater Noida.
 - Random Forest — decorrelated trees via random feature subset at each split
 - OOB score — free validation without separate val set
 - SHAP values — explained individual predictions with waterfall plot
-- Feature importance — permutation vs built-in vs SHAP (all agree: Title #1 on Titanic)
+- Feature importance — permutation vs built-in vs SHAP
 - GridSearchCV vs RandomizedSearchCV — when to use each
-- Fit time vs score tradeoff — more trees ≠ better score
 - joblib — save and load trained models for production
 - Feature engineering — TotalSF ranked #1 by SHAP on House Prices
 
@@ -121,15 +120,69 @@ Currently: 3rd year B.Tech CSE (AI) student at NIET, Greater Noida.
 
 ---
 
+### Week 4 — SQL + Data Engineering ✅
+
+| Day | Topic | Status |
+|-----|-------|--------|
+| Day 1 | SQL foundations — SELECT, WHERE, GROUP BY, JOINs | ✅ |
+| Day 2 | Window functions — ROW_NUMBER, RANK, LAG, LEAD | ✅ |
+| Day 3 | EDA at scale — ydata-profiling, distributions, Q-Q plot | ✅ |
+| Day 4 | Missing data — MCAR/MAR/MNAR, imputation comparison | ✅ |
+| Day 5 | Outlier detection — IQR, Z-score, IsolationForest | ✅ |
+| Day 6 | Melbourne Housing — full data cleaning pipeline | ✅ |
+
+**Key concepts mastered:**
+- SQL — SELECT, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT
+- SQL JOINs — INNER vs LEFT JOIN with real examples
+- Window functions — ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, running totals
+- SQLite in Python — pd.read_sql(), to_sql()
+- ydata-profiling — automated EDA report generation
+- Skewness and kurtosis — log transformation fixes both
+- Q-Q plot — checking normality of distributions
+- Missing data types — MCAR, MAR, MNAR classification
+- Imputation comparison — Drop < Simple < KNN < Iterative (best)
+- Missingness indicators — binary flags capture MNAR signal
+- IQR outlier detection from scratch
+- Z-score outlier detection from scratch
+- IsolationForest — multivariate outlier detection
+- Outlier removal impact — IsoForest cleaning improved RMSE by 9.8%
+
+**Reusable functions added to src/utils.py:**
+- ✅ evaluate_model() — cross-validated accuracy + F1
+- ✅ eda_summary() — quick dataset overview
+- ✅ report_missing() — missing value analysis with strategy
+
+**SQL key finding:**
+Female 1st class → 96.81% survival vs Male 3rd class → 13.54%
+Gap of 83.27% — found in one SQL query, verified with Pandas ✅
+
+---
+
+### Week 5 — XGBoost + LightGBM 🔄
+
+| Day | Topic | Status |
+|-----|-------|--------|
+| Day 1 | XGBoost — first model, Titanic + House Prices | ✅ |
+| Day 2 | XGBoost tuning — early stopping, hyperparameters | 🔄 |
+| Day 3 | LightGBM — faster gradient boosting | ⏳ |
+| Day 4 | Advanced feature engineering | ⏳ |
+| Day 5 | Model stacking + ensembling | ⏳ |
+| Day 6 | House Prices v3 — full pipeline | ⏳ |
+
+**Kaggle Scores (Week 5 so far):**
+- House Prices v4 (XGBoost) : 0.12930 ← new best 🏆
+
+---
+
 ## 📁 Repository Structure
 
 ```
 ml-journey/
 ├── src/
-│   └── utils.py               ← reusable evaluate_model() function
+│   └── utils.py               ← evaluate_model(), eda_summary(), report_missing()
 ├── models/
-│   ├── rf_best.pkl            ← best Titanic Random Forest (joblib)
-│   └── house_prices_rf.pkl    ← best House Prices Random Forest (joblib)
+│   ├── rf_best.pkl            ← best Titanic Random Forest
+│   └── house_prices_rf.pkl    ← best House Prices Random Forest
 ├── week1/
 │   ├── week1_day1_ml_intro.ipynb
 │   ├── week1_day2_numpy.ipynb
@@ -143,13 +196,23 @@ ml-journey/
 │   ├── week2_day4_cross_validation_deep.ipynb
 │   ├── week2_day4_evaluation_metrics.ipynb
 │   └── week2_day6_titanic_v2_pipeline.ipynb
-└── week 3/
-    ├── week3_day1_decision_trees.ipynb
-    ├── week3_day2_overfitting_pruning.ipynb
-    ├── week3_day3_random_forests.ipynb
-    ├── week3_day4_shap_feature_importance.ipynb
-    ├── week3_day5_hyperparameter_tuning.ipynb
-    └── week3_day6_house_prices.ipynb
+├── week 3/
+│   ├── week3_day1_decision_trees.ipynb
+│   ├── week3_day2_overfitting_pruning.ipynb
+│   ├── week3_day3_random_forests.ipynb
+│   ├── week3_day4_shap_feature_importance.ipynb
+│   ├── week3_day5_hyperparameter_tuning.ipynb
+│   └── week3_day6_house_prices.ipynb
+├── week 4/
+│   ├── week4_day1_sql_for_ml.ipynb
+│   ├── week4_day2_window_functions.ipynb
+│   ├── week4_day3_eda_at_scale.ipynb
+│   ├── week4_day4_missing_data.ipynb
+│   ├── week4_day5_outlier_detection.ipynb
+│   └── week4_day6_melbourne_cleaning.ipynb
+└── week 5/
+    ├── week5_day1_xgboost.ipynb
+    └── week5_day2_xgboost_tuning.ipynb
 ```
 
 ---
@@ -163,7 +226,8 @@ ml-journey/
 | Titanic | v3 | 0.76794 | Week 3 | RF depth=None (overfit) |
 | Titanic | v4 | 0.78468 | Week 3 | RF depth=5 ← best ✅ |
 | House Prices | v1 | 0.15197 | Week 3 | Basic Random Forest |
-| House Prices | v2 | 0.14864 | Week 3 | RF + feature engineering ← top 40% ✅ |
+| House Prices | v2 | 0.14864 | Week 3 | RF + feature engineering |
+| House Prices | v3 | 0.12930 | Week 5 | XGBoost ← new best 🏆 |
 
 ---
 
@@ -175,19 +239,24 @@ ml-journey/
 
 **Pandas:** DataFrames, groupby, merge, missing values, feature engineering
 
-**Matplotlib + Seaborn:** line, bar, scatter, histogram, subplots, heatmaps
+**Matplotlib + Seaborn:** line, bar, scatter, histogram, subplots, heatmaps, pairplots
+
+**SQL:** SELECT, WHERE, GROUP BY, HAVING, ORDER BY, JOINs, Window Functions
 
 **Sklearn:**
 - LinearRegression, Ridge, Lasso, LogisticRegression
 - DecisionTreeClassifier, RandomForestClassifier, RandomForestRegressor
 - Pipeline, ColumnTransformer
-- StandardScaler, OneHotEncoder, SimpleImputer
+- StandardScaler, OneHotEncoder, OrdinalEncoder, SimpleImputer, KNNImputer
 - cross_val_score, cross_validate, StratifiedKFold, KFold
 - GridSearchCV, RandomizedSearchCV
-- permutation_importance, confusion matrix, classification report, ROC AUC
+- IsolationForest, permutation_importance
+- confusion matrix, classification report, ROC AUC
 - joblib — model saving and loading
 
-**SHAP:** TreeExplainer, summary plot, waterfall plot, feature importance
+**Gradient Boosting:** XGBoost (classifier + regressor), early stopping
+
+**SHAP:** TreeExplainer, summary plot, waterfall plot
 
 **ML Concepts:**
 - Bias-variance tradeoff
@@ -200,15 +269,18 @@ ml-journey/
 - Multicollinearity detection
 - Decision trees — Gini impurity, information gain, pruning
 - Ensemble methods — bagging, random forests, OOB score
+- Gradient boosting — XGBoost sequential tree learning
 - Hyperparameter tuning — GridSearchCV vs RandomizedSearchCV
 - SHAP values — local and global model explanations
+- Missing data — MCAR, MAR, MNAR classification
+- Outlier detection — IQR, Z-score, IsolationForest
+- SQL for data analysis — window functions, JOINs, aggregations
 
 ---
 
-## 📅 Next Up — Week 4
-- SQL for ML workflows
-- Window functions
-- EDA at scale with ydata-profiling
-- Missing data strategies — MCAR, MAR, MNAR
-- Outlier detection — IQR, Z-score, IsolationForest
-- Melbourne Housing data cleaning project
+## 📅 Next Up — Week 5 (continuing)
+- XGBoost early stopping + tuning
+- LightGBM — faster gradient boosting
+- Advanced feature engineering — target encoding
+- Model stacking + ensembling
+- House Prices below 0.13 (top 20%)
